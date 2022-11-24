@@ -1,0 +1,22 @@
+UA_ObjectAttributes Attr = UA_ObjectAttributes_default;
+    Attr.displayName = UA_LOCALIZEDTEXT("en-US", "Heater");
+    UA_Server_addObjectNode(server, UA_NODEID_NUMERIC(2,10000), UA_NODEID_NUMERIC(0, UA_NS0ID_OBJECTSFOLDER),
+                            UA_NODEID_NUMERIC(0, UA_NS0ID_ORGANIZES),
+                            UA_QUALIFIEDNAME(2, "Heater"),
+                            UA_NODEID_NUMERIC(2,1002) ,Attr, NULL, NULL);
+
+    /*********************
+     * Set the  Qualified Name and values of the NodeIds
+     *********************/
+    char *name = 
+    UA_NodeId Object_nodeId = 
+    UA_NodeId ParentNodeId = 
+    UA_NodeId ReferenceTypeNodeId = UA_NODEID_NUMERIC(0, UA_NS0ID_HASCOMPONENT);
+    UA_NodeId TypeDefinition_NodeId = UA_NODEID_NUMERIC(2,1001);
+
+    UA_ObjectAttributes Controller_Attr = UA_ObjectAttributes_default;
+    Controller_Attr.displayName = UA_LOCALIZEDTEXT("en-US", name);
+    UA_Server_addObjectNode(server, Object_nodeId, ParentNodeId,
+                            ReferenceTypeNodeId,
+                            UA_QUALIFIEDNAME(2, name),
+                            TypeDefinition_NodeId ,Controller_Attr, NULL, NULL);

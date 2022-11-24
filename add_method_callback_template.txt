@@ -1,0 +1,45 @@
+
+
+/******************
+*Add the Set_Temperature Callback function here
+******************/
+static UA_StatusCode Set_Temperature_Callback(UA_Server *server,
+                                              const UA_NodeId *sessionId, void *sessionHandle,
+                                              const UA_NodeId *methodId, void *methodContext,
+                                              const UA_NodeId *objectId, void *objectContext,
+                                              size_t inputSize, const UA_Variant *input,
+                                              size_t outputSize, UA_Variant *output){
+
+
+    UA_Double *new_val = UA_Double_new();
+    *new_val = *(UA_Double*) input->data;
+
+    UA_Temperature_parameter_Set *current_vals = UA_Temperature_parameter_Set_new();
+    current_vals->current_temp = (UA_Double) 20;
+    current_vals->desired_temp = *new_val;
+
+    UA_Variant cur_val;
+    UA_Variant_init(&cur_val);
+    UA_NodeId temp_Var_NodeId = UA_NODEID_NUMERIC(2, 58192);
+    UA_Variant_setScalar(&cur_val, current_vals, &UA_TYPES_TEMPERATURE[UA_TYPES_TEMPERATURE_TEMPERATURE_PARAMETER_SET]);
+    UA_Server_writeValue(server, temp_Var_NodeId, cur_val);
+    UA_Variant_clear(&cur_val);
+
+    return UA_STATUSCODE_GOOD;
+
+}
+
+
+
+
+
+/************************************************
+	*add the link method callback here
+	************************************************/
+/*****************************************************
+     * Set the MethodNode Id and the callback function here
+     ******************************************************/
+    UA_NodeId Method_NodeId = 
+    UA_MethodCallback callback_func = 
+    UA_Server_setMethodNodeCallback(server, Method_NodeId,
+                                    (UA_MethodCallback) callback_func);

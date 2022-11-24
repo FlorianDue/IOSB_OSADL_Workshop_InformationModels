@@ -1,0 +1,22 @@
+    
+	
+	/********************************
+	*insert the write custom variable template here
+	*******************************/
+	
+    UA_Temperature_parameter_Set initial_value;
+    UA_Temperature_parameter_Set_init(&initial_value);
+    UA_Variant value;
+    UA_Variant_init(&value);
+
+    /********************
+     * Set the values here
+     ******************/
+    initial_value.desired_temp = 
+    initial_value.current_temp = 
+    UA_NodeId temp_Var_NodeId = 
+    const UA_DataType *type = &UA_TYPES_TEMPERATURE[UA_TYPES_TEMPERATURE_TEMPERATURE_PARAMETER_SET];
+    
+
+    UA_Variant_setScalar(&value, &initial_value, type);
+    UA_Server_writeValue(server, temp_Var_NodeId, value);
